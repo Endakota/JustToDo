@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -43,15 +42,11 @@ public:
     QVBoxLayout *verticalLayout_2;
     QGroupBox *groupBox_4;
     QHBoxLayout *horizontalLayout_2;
-    QLineEdit *lineEdit;
-    QPushButton *pushButton_2;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
+    QLineEdit *task_line;
+    QPushButton *addTask;
+    QScrollArea *scrollTasks;
+    QWidget *layout;
     QVBoxLayout *verticalLayout_3;
-    QCheckBox *checkBox;
-    QCheckBox *checkBox_3;
-    QCheckBox *checkBox_2;
-    QCheckBox *checkBox_4;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -131,71 +126,38 @@ public:
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        lineEdit = new QLineEdit(groupBox_4);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setMinimumSize(QSize(0, 40));
+        task_line = new QLineEdit(groupBox_4);
+        task_line->setObjectName(QString::fromUtf8("task_line"));
+        task_line->setMinimumSize(QSize(0, 40));
 
-        horizontalLayout_2->addWidget(lineEdit);
+        horizontalLayout_2->addWidget(task_line);
 
-        pushButton_2 = new QPushButton(groupBox_4);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setMinimumSize(QSize(0, 40));
+        addTask = new QPushButton(groupBox_4);
+        addTask->setObjectName(QString::fromUtf8("addTask"));
+        addTask->setMinimumSize(QSize(0, 40));
 
-        horizontalLayout_2->addWidget(pushButton_2);
+        horizontalLayout_2->addWidget(addTask);
 
 
         verticalLayout_2->addWidget(groupBox_4);
 
-        scrollArea = new QScrollArea(groupBox_2);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setAutoFillBackground(false);
-        scrollArea->setStyleSheet(QString::fromUtf8("border-color:red;"));
-        scrollArea->setFrameShape(QFrame::StyledPanel);
-        scrollArea->setFrameShadow(QFrame::Sunken);
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 533, 443));
-        verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents);
+        scrollTasks = new QScrollArea(groupBox_2);
+        scrollTasks->setObjectName(QString::fromUtf8("scrollTasks"));
+        scrollTasks->setAutoFillBackground(false);
+        scrollTasks->setStyleSheet(QString::fromUtf8("border-color:red;"));
+        scrollTasks->setFrameShape(QFrame::StyledPanel);
+        scrollTasks->setFrameShadow(QFrame::Sunken);
+        scrollTasks->setWidgetResizable(true);
+        layout = new QWidget();
+        layout->setObjectName(QString::fromUtf8("layout"));
+        layout->setGeometry(QRect(0, 0, 554, 420));
+        verticalLayout_3 = new QVBoxLayout(layout);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        checkBox = new QCheckBox(scrollAreaWidgetContents);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        checkBox->setMinimumSize(QSize(300, 100));
-        checkBox->setSizeIncrement(QSize(0, 0));
-        QFont font;
-        font.setPointSize(14);
-        checkBox->setFont(font);
-        checkBox->setStyleSheet(QString::fromUtf8(""));
-        checkBox->setAutoExclusive(false);
+        scrollTasks->setWidget(layout);
 
-        verticalLayout_3->addWidget(checkBox);
-
-        checkBox_3 = new QCheckBox(scrollAreaWidgetContents);
-        checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
-        checkBox_3->setMinimumSize(QSize(0, 100));
-        checkBox_3->setFont(font);
-
-        verticalLayout_3->addWidget(checkBox_3);
-
-        checkBox_2 = new QCheckBox(scrollAreaWidgetContents);
-        checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
-        checkBox_2->setMinimumSize(QSize(300, 100));
-        checkBox_2->setFont(font);
-
-        verticalLayout_3->addWidget(checkBox_2);
-
-        checkBox_4 = new QCheckBox(scrollAreaWidgetContents);
-        checkBox_4->setObjectName(QString::fromUtf8("checkBox_4"));
-        checkBox_4->setMinimumSize(QSize(300, 100));
-        checkBox_4->setFont(font);
-
-        verticalLayout_3->addWidget(checkBox_4);
-
-        scrollArea->setWidget(scrollAreaWidgetContents);
-
-        verticalLayout_2->addWidget(scrollArea);
+        verticalLayout_2->addWidget(scrollTasks);
 
 
         horizontalLayout->addWidget(groupBox_2);
@@ -225,12 +187,8 @@ public:
         pushButton->setText(QApplication::translate("MainWindow", "+", nullptr));
         groupBox_2->setTitle(QString());
         groupBox_4->setTitle(QString());
-        lineEdit->setPlaceholderText(QApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\264\320\276\320\261\320\260\320\262\320\273\321\217\320\265\320\274\321\203\321\216 \320\267\320\260\320\264\320\260\321\207\321\203", nullptr));
-        pushButton_2->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\267\320\260\320\264\320\260\321\207\321\203", nullptr));
-        checkBox->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\264\320\260\321\207\320\260 1", nullptr));
-        checkBox_3->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\264\320\260\321\207\320\260 2", nullptr));
-        checkBox_2->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\264\320\260\321\207\320\260 3", nullptr));
-        checkBox_4->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\264\320\260\321\207\320\260 4", nullptr));
+        task_line->setPlaceholderText(QApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\264\320\276\320\261\320\260\320\262\320\273\321\217\320\265\320\274\321\203\321\216 \320\267\320\260\320\264\320\260\321\207\321\203", nullptr));
+        addTask->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\267\320\260\320\264\320\260\321\207\321\203", nullptr));
     } // retranslateUi
 
 };

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[7];
-    char stringdata0[98];
+    char stringdata0[93];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +37,12 @@ QT_MOC_LITERAL(2, 33, 0), // ""
 QT_MOC_LITERAL(3, 34, 21), // "on_listWidget_clicked"
 QT_MOC_LITERAL(4, 56, 11), // "QModelIndex"
 QT_MOC_LITERAL(5, 68, 5), // "index"
-QT_MOC_LITERAL(6, 74, 23) // "on_pushButton_2_clicked"
+QT_MOC_LITERAL(6, 74, 18) // "on_addTask_clicked"
 
     },
     "MainWindow\0on_pushButton_clicked\0\0"
     "on_listWidget_clicked\0QModelIndex\0"
-    "index\0on_pushButton_2_clicked"
+    "index\0on_addTask_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -80,7 +80,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->on_pushButton_clicked(); break;
         case 1: _t->on_listWidget_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
-        case 2: _t->on_pushButton_2_clicked(); break;
+        case 2: _t->on_addTask_clicked(); break;
         default: ;
         }
     }
