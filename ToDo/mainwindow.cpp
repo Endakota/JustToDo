@@ -2,12 +2,12 @@
 #include "ui_mainwindow.h"
 #include <QCheckBox>
 #include <Qt>
-#include <QMessageBox>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     QListWidgetItem *today = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/today.png"),"Мой день");
     ui->listWidget->insertItem(ui->listWidget->count(), today);
 
@@ -16,9 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QListWidgetItem *all = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/list.png"),"Задачи");
     ui->listWidget->insertItem(ui->listWidget->count(), all);
-    QFont newFont("Courier", 10);
+    QFont newFont("MS Shell Dlg 2", 10);
     ui->listWidget->setFont(newFont);
-
+    ui->listWidget->setCurrentRow(2);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableWidget->setColumnCount(1);
+    ui->tableWidget->setHorizontalHeaderLabels({ui->listWidget->currentItem()->text()});
 }
 
 MainWindow::~MainWindow()
@@ -36,21 +39,22 @@ void MainWindow::on_pushButton_clicked()
         QListWidgetItem *newItem = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/point'.png"),"Новый список" + QString::number(count));
         ui->listWidget->insertItem(ui->listWidget->count(), newItem);
     }
-
-
 }
 
 void MainWindow::on_listWidget_clicked(const QModelIndex &index)
 {
-    ui->task_line->setText(ui->listWidget->currentItem()->text());
-    QFont newFont("Courier", 10);
+    QFont newFont("MS Shell Dlg 2", 10);
     ui->task_line->setFont(newFont);
     ui->listWidget->currentItem()->setFlags (ui->listWidget->currentItem()->flags () | Qt::ItemIsEditable);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableWidget->setColumnCount(1);
+    ui->tableWidget->setHorizontalHeaderLabels({ui->listWidget->currentItem()->text()});
 }
 
 void MainWindow::on_addTask_clicked()
 {
-
+    ui->tableWidget->insertRow( ui->tableWidget->rowCount() );
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 0, new QTableWidgetItem(ui->task_line->text()));
+    ui->task_line->clear();
 }
-
 

@@ -197,7 +197,15 @@
             <height>420</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3"/>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QTableWidget" name="tableWidget">
+             <property name="rowCount">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>
