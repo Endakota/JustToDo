@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "todoclass.h"
 namespace Ui {
 class MainWindow;
 }
@@ -24,9 +24,9 @@ private slots:
     void on_addTask_clicked();
 
 
-
 private:
     Ui::MainWindow *ui;
 };
+
 
 #endif // MAINWINDOW_H

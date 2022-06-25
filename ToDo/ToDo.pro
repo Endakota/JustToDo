@@ -29,7 +29,9 @@ SOURCES += \
         mainwindow.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    todoclass.h \
+    saving.h
 
 FORMS += \
         mainwindow.ui
