@@ -228,6 +228,7 @@ Makefile: ../ToDo/ToDo.pro C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/win32-g++/qm
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/resolve_config.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/exclusive_builds_post.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/default_post.prf \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/win32/console.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/qml_debug.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/precompile_header.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/warn_on.prf \
@@ -238,7 +239,6 @@ Makefile: ../ToDo/ToDo.pro C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/win32-g++/qm
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/uic.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/qmake_use.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/file_copies.prf \
-		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/win32/windows.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/testcase_targets.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/exceptions.prf \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/yacc.prf \
@@ -246,8 +246,7 @@ Makefile: ../ToDo/ToDo.pro C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/win32-g++/qm
 		../ToDo/ToDo.pro \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/Qt5Widgets.prl \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/Qt5Gui.prl \
-		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/Qt5Core.prl \
-		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/qtmaind.prl
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/Qt5Core.prl
 	$(QMAKE) -o Makefile ..\ToDo\ToDo.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/spec_pre.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/qdevice.pri:
@@ -416,6 +415,7 @@ C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/win32/default_pre.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/resolve_config.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/exclusive_builds_post.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/default_post.prf:
+C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/win32/console.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/qml_debug.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/precompile_header.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/warn_on.prf:
@@ -426,7 +426,6 @@ C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/win32/opengl.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/uic.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/qmake_use.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/file_copies.prf:
-C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/win32/windows.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/testcase_targets.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/exceptions.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/yacc.prf:
@@ -435,7 +434,6 @@ C:/Qt/Qt5.12.0/5.12.0/mingw73_64/mkspecs/features/lex.prf:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/Qt5Widgets.prl:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/Qt5Gui.prl:
 C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/Qt5Core.prl:
-C:/Qt/Qt5.12.0/5.12.0/mingw73_64/lib/qtmaind.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\ToDo\ToDo.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

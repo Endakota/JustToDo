@@ -37,8 +37,7 @@ class Saving
          readTask.close();
          return taskInFile;
     }
-    // path - опознавательная цифра Списка, куда записывается задача(например, "1" - "Мой день"\\; stroka - сама задача
-    public: vector<string> AddTask(string path, string stroka)//string path, string stroka)
+    public: vector<string> AddTask(string path, string stroka)
     {
         string line;
         vector<string> taskInFile;
@@ -56,6 +55,23 @@ class Saving
         return taskInFile;
 
     }
+    public: vector<string> Addtasks_n(string path, vector<string> tasks){
+        string line;
+        vector<string> taskInFile;
+        ifstream readTask;
+        readTask.open("Tasks.csv");
+        while (!readTask.eof()) {
+            getline(readTask, line);
+            if(path != line.substr(0,1)){
+                taskInFile.push_back(line);
+            }
+        }
+        readTask.close();
+        for(auto i : tasks){
+            taskInFile.push_back(i);
+        }
+        return taskInFile;
+    }
     public: void WriteTask(vector<string> task)
     {
         ofstream writeTask;
@@ -68,7 +84,17 @@ class Saving
 
         writeTask.close();
     }
+    public:void WriteSpiskiN(vector<string> spisok)
+    {
+        ofstream outFile;
+        outFile.open("Spiski.csv");
+        for (auto val: spisok)
+        {
+            outFile <<endl<< val;
+        }
 
+        outFile.close();
+    }
 
     public: void WriteSpiski(string spisok)
     {

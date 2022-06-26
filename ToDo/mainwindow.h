@@ -15,14 +15,17 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
+protected slots:
     void on_pushButton_clicked();
 
     void on_listWidget_clicked(const QModelIndex &index);
 
 
     void on_addTask_clicked();
-
+    virtual void closeEvent(QCloseEvent *event);
+    void ShowContextMenu(const QPoint& pos);
+    void on_action_1();
+    void on_action_2();
 
 private:
     Ui::MainWindow *ui;

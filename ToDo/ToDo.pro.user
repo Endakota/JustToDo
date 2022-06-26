@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.8.0, 2022-06-25T16:47:02. -->
+<!-- Written by QtCreator 4.8.0, 2022-06-26T20:41:18. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -307,6 +307,7 @@
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseTerminal">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/Endakota/Desktop/ToDo/build-ToDo-Desktop_Qt_5_12_0_MinGW_64_bit-Debug</value>
    </valuemap>
