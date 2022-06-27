@@ -6,7 +6,11 @@
 #include <vector>
 
 using namespace std;
-
+struct Spisok{
+    string iconPath;
+    string name;
+    vector <string> tasks;
+};
 class Saving
 {
     public:vector<string> Read()
@@ -55,23 +59,23 @@ class Saving
         return taskInFile;
 
     }
-    public: vector<string> Addtasks_n(string path, vector<string> tasks){
-        string line;
-        vector<string> taskInFile;
-        ifstream readTask;
-        readTask.open("Tasks.csv");
-        while (!readTask.eof()) {
-            getline(readTask, line);
-            if(path != line.substr(0,1)){
-                taskInFile.push_back(line);
-            }
-        }
-        readTask.close();
-        for(auto i : tasks){
-            taskInFile.push_back(i);
-        }
-        return taskInFile;
-    }
+//    public: vector<string> Addtasks_n(string path, vector<string> tasks){
+//        string line;
+//        vector<string> taskInFile;
+//        ifstream readTask;
+//        readTask.open("Tasks.csv");
+//        while (!readTask.eof()) {
+//            getline(readTask, line);
+//            if(path != line.substr(0,1)){
+//                taskInFile.push_back(line);
+//            }
+//        }
+//        readTask.close();
+//        for(auto i : tasks){
+//            taskInFile.push_back(i);
+//        }
+//        return taskInFile;
+//    }
     public: void WriteTask(vector<string> task)
     {
         ofstream writeTask;

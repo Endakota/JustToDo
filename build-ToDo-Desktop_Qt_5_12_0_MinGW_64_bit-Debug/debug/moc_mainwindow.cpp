@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[14];
-    char stringdata0[167];
+    QByteArrayData data[16];
+    char stringdata0[189];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,23 +35,26 @@ QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 21), // "on_pushButton_clicked"
 QT_MOC_LITERAL(2, 33, 0), // ""
 QT_MOC_LITERAL(3, 34, 21), // "on_listWidget_clicked"
-QT_MOC_LITERAL(4, 56, 11), // "QModelIndex"
-QT_MOC_LITERAL(5, 68, 5), // "index"
-QT_MOC_LITERAL(6, 74, 18), // "on_addTask_clicked"
-QT_MOC_LITERAL(7, 93, 10), // "closeEvent"
-QT_MOC_LITERAL(8, 104, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(9, 117, 5), // "event"
-QT_MOC_LITERAL(10, 123, 15), // "ShowContextMenu"
-QT_MOC_LITERAL(11, 139, 3), // "pos"
-QT_MOC_LITERAL(12, 143, 11), // "on_action_1"
-QT_MOC_LITERAL(13, 155, 11) // "on_action_2"
+QT_MOC_LITERAL(4, 56, 18), // "on_addTask_clicked"
+QT_MOC_LITERAL(5, 75, 10), // "closeEvent"
+QT_MOC_LITERAL(6, 86, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(7, 99, 5), // "event"
+QT_MOC_LITERAL(8, 105, 15), // "ShowContextMenu"
+QT_MOC_LITERAL(9, 121, 3), // "pos"
+QT_MOC_LITERAL(10, 125, 11), // "on_action_1"
+QT_MOC_LITERAL(11, 137, 15), // "ShowContextTask"
+QT_MOC_LITERAL(12, 153, 10), // "deleteTask"
+QT_MOC_LITERAL(13, 164, 7), // "add2Fav"
+QT_MOC_LITERAL(14, 172, 7), // "add2Day"
+QT_MOC_LITERAL(15, 180, 8) // "doneTask"
 
     },
     "MainWindow\0on_pushButton_clicked\0\0"
-    "on_listWidget_clicked\0QModelIndex\0"
-    "index\0on_addTask_clicked\0closeEvent\0"
-    "QCloseEvent*\0event\0ShowContextMenu\0"
-    "pos\0on_action_1\0on_action_2"
+    "on_listWidget_clicked\0on_addTask_clicked\0"
+    "closeEvent\0QCloseEvent*\0event\0"
+    "ShowContextMenu\0pos\0on_action_1\0"
+    "ShowContextTask\0deleteTask\0add2Fav\0"
+    "add2Day\0doneTask"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +64,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,20 +72,28 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x09 /* Protected */,
-       3,    1,   50,    2, 0x09 /* Protected */,
-       6,    0,   53,    2, 0x09 /* Protected */,
-       7,    1,   54,    2, 0x09 /* Protected */,
-      10,    1,   57,    2, 0x09 /* Protected */,
-      12,    0,   60,    2, 0x09 /* Protected */,
-      13,    0,   61,    2, 0x09 /* Protected */,
+       1,    0,   69,    2, 0x09 /* Protected */,
+       3,    0,   70,    2, 0x09 /* Protected */,
+       4,    0,   71,    2, 0x09 /* Protected */,
+       5,    1,   72,    2, 0x09 /* Protected */,
+       8,    1,   75,    2, 0x09 /* Protected */,
+      10,    0,   78,    2, 0x09 /* Protected */,
+      11,    1,   79,    2, 0x09 /* Protected */,
+      12,    0,   82,    2, 0x09 /* Protected */,
+      13,    0,   83,    2, 0x09 /* Protected */,
+      14,    0,   84,    2, 0x09 /* Protected */,
+      15,    0,   85,    2, 0x09 /* Protected */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 4,    5,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 8,    9,
-    QMetaType::Void, QMetaType::QPoint,   11,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void, QMetaType::QPoint,    9,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QPoint,    9,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -96,12 +107,16 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->on_pushButton_clicked(); break;
-        case 1: _t->on_listWidget_clicked((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
+        case 1: _t->on_listWidget_clicked(); break;
         case 2: _t->on_addTask_clicked(); break;
         case 3: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 4: _t->ShowContextMenu((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
         case 5: _t->on_action_1(); break;
-        case 6: _t->on_action_2(); break;
+        case 6: _t->ShowContextTask((*reinterpret_cast< const QPoint(*)>(_a[1]))); break;
+        case 7: _t->deleteTask(); break;
+        case 8: _t->add2Fav(); break;
+        case 9: _t->add2Day(); break;
+        case 10: _t->doneTask(); break;
         default: ;
         }
     }
@@ -136,13 +151,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 11;
     }
     return _id;
 }

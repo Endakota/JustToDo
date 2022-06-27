@@ -21,16 +21,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->listWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
             this, SLOT(ShowContextMenu(const QPoint&)));
 
+    ui->tableWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->tableWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
+            this, SLOT(ShowContextTask(const QPoint&)));
 
 
-
-    QListWidgetItem *today = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/today.png"),"Мой день");
+    QListWidgetItem *today = new QListWidgetItem(QIcon("img/today.png"),"Мой день");
     ui->listWidget->insertItem(ui->listWidget->count(), today);
 
-    QListWidgetItem *favourites = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/star.png"),"Избранное");
+    QListWidgetItem *favourites = new QListWidgetItem(QIcon("img/star.png"),"Избранное");
     ui->listWidget->insertItem(ui->listWidget->count(), favourites);
 
-    QListWidgetItem *all = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/list.png"),"Задачи");
+    QListWidgetItem *all = new QListWidgetItem(QIcon("img/list.png"),"Задачи");
     ui->listWidget->insertItem(ui->listWidget->count(), all);
     QFont newFont("MS Shell Dlg 2", 8);
     ui->listWidget->setFont(newFont);
@@ -43,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     std::vector<std::string> task_names = ads.Read();
     task_names.erase(task_names.begin());
     for(string l : task_names){
-        QListWidgetItem *newItem = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/point'.png"),QString::fromStdString(l));
+        QListWidgetItem *newItem = new QListWidgetItem(QIcon("img/point'.png"),QString::fromStdString(l));
         ui->listWidget->insertItem(ui->listWidget->count(), newItem);
     }
     std::vector<std::string> readTask = ads.ReadTask();
@@ -70,28 +72,81 @@ void MainWindow::ShowContextMenu(const QPoint& pos)
     // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
     QMenu myMenu;
     myMenu.addAction("Удалить список", this, SLOT(on_action_1()));
-    myMenu.addAction("Пункт 2", this, SLOT(on_action_2()));
+
     myMenu.exec(globalPos);
+}
+
+void MainWindow::ShowContextTask(const QPoint& pos)
+{
+// for most widgets
+    QPoint globalPos = ui->tableWidget->mapToGlobal(pos);
+    // for QAbstractScrollArea and derived classes you would use:
+    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
+    QMenu myMenu;
+    myMenu.addAction("Удалить задачу", this, SLOT(deleteTask()));
+    if(ui->listWidget->currentItem()->text() == "Мой день" || ui->listWidget->currentItem()->text() == "Задачи"){
+        myMenu.addAction("Добавить задачу в 'Избранное'", this, SLOT(add2Fav()));
+    }
+    if(ui->listWidget->currentItem()->text() == "Избранное" || ui->listWidget->currentItem()->text() == "Задачи"){
+        myMenu.addAction("Добавить задачу в 'Мой день'", this, SLOT(add2Day()));
+    }
+    myMenu.addAction("Готово",this, SLOT(doneTask()));
+    myMenu.exec(globalPos);
+}
+void MainWindow::deleteTask()
+{
+    ui->tableWidget->removeRow(ui->tableWidget->currentRow());
+}
+void MainWindow::add2Fav(){
+    Saving ads;
+    vector<string> v = ads.ReadTask();
+    v.push_back("1" + ui->tableWidget->currentItem()->text().toStdString());
+    ads.WriteTask(v);
+    ui->tableWidget->removeRow(ui->tableWidget->currentRow());
+}
+void MainWindow::add2Day(){
+    Saving ads;
+    vector<string> v = ads.ReadTask();
+    v.push_back("0" + ui->tableWidget->currentItem()->text().toStdString());
+    ads.WriteTask(v);
+    ui->tableWidget->removeRow(ui->tableWidget->currentRow());
+}
+void MainWindow::doneTask(){
+    Saving ads;
+    vector<string> ss = ads.ReadTask();
+    ss.erase(ss.begin());
+    for(size_t i = 0; i < ss.size(); i++){
+        if(ss[i].size() > 0){
+            if(ss[i].substr(1) == ui->tableWidget->currentItem()->text().toStdString()){
+                ss[i] += "0";
+                QFont f = ui->tableWidget->currentItem()->font();
+                f.setStrikeOut(true);
+                ui->tableWidget->currentItem()->setFont(f);
+                break;
+            }
+        }
+    }
+    ads.WriteTask(ss);
 }
 void MainWindow::on_action_1()
 {
     if(ui->listWidget->currentItem()->text() != "Мой день" && ui->listWidget->currentItem()->text() != "Избранное" && ui->listWidget->currentItem()->text() != "Задачи" ){
         int index = ui->listWidget->currentRow();
-
         Saving ads;
         vector <string> ss = ads.ReadTask();
 
         vector <string> ss_n;
-        for(size_t i = 0; i < ss.size(); i++){
-            if(ss[i].substr(0,1) != std::to_string(index)){
-                /*if(ss[i].substr(0,1) > std::to_string(index)) {
-                    string stroka = "";
-                    stroka += std::to_string(index) + ss[i].substr(1);
-                    ss[i] = stroka;
-                }*/
+        ss_n.push_back("");
+        for(size_t i = 1; i < ss.size(); i++){
+            if(ss[i][0] < std::to_string(index)[0]){
+                ss_n.push_back(ss[i]);
+            }else if (ss[i][0] > std::to_string(index)[0]){
+                ss[i][0] = std::to_string(stoi(ss[i].substr(0,1)) - 1)[0];
                 ss_n.push_back(ss[i]);
             }
         }
+
+
         ads.WriteTask(ss_n);
 
         QListWidgetItem *it = ui->listWidget->takeItem(index);
@@ -101,10 +156,7 @@ void MainWindow::on_action_1()
     }
 
 }
-void MainWindow::on_action_2()
-{
-//тело слота on_action_2
-}
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -132,20 +184,31 @@ void MainWindow::on_pushButton_clicked()
         if (count > 0){
             index++;
         }else{
-            QListWidgetItem *newItem = new QListWidgetItem(QIcon("C:/Users/Endakota/Desktop/ToDo/point'.png"),"Новый список (" + QString::number(index) + ")");
+            QListWidgetItem *newItem = new QListWidgetItem(QIcon("img/point'.png"),"Новый список (" + QString::number(index) + ")");
             ui->listWidget->insertItem(ui->listWidget->count(), newItem);
-            ads.WriteSpiski("Новый список" + std::to_string(count));
+            ads.WriteSpiski("Новый список (" + std::to_string(index)+")");
             break;
         }
         count = 0;
     }
 }
-
-void MainWindow::on_listWidget_clicked(const QModelIndex &index)
+int step = 2;
+void MainWindow::on_listWidget_clicked()
 {
-
     Saving ads;
+    vector<string> all_tasks = ads.ReadTask();
 
+    vector<string> ss;
+    ss.push_back("");
+    for(int i = 0; i < ui->tableWidget->rowCount(); i++){
+        ss.push_back(std::to_string(step) + ui->tableWidget->item(i,0)->text().toStdString());
+    }
+    for(size_t i = 0; i < all_tasks.size(); i++){
+        if(all_tasks[i].substr(0,1) != std::to_string(step)){
+             ss.push_back(all_tasks[i]);
+        }
+    }
+    ads.WriteTask(ss);
 
     std::vector<std::string> readTask = ads.ReadTask();
     readTask.erase(readTask.begin());
@@ -166,12 +229,18 @@ void MainWindow::on_listWidget_clicked(const QModelIndex &index)
             if(!std::to_string(row).compare(l.substr(0,1))){
                 ui->tableWidget->insertRow(ui->tableWidget->rowCount());
                 ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 0, new QTableWidgetItem(QString::fromStdString(l.substr(1))));
+
             }
         }
     }
+
+
+
+
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget->setColumnCount(1);
     ui->tableWidget->setHorizontalHeaderLabels({ui->listWidget->currentItem()->text()});
+    step = ui->listWidget->currentRow();
 }
 
 void MainWindow::on_addTask_clicked()
@@ -201,6 +270,20 @@ void MainWindow::closeEvent(QCloseEvent *event)
            ssn.push_back(ui->listWidget->item(i)->text().toStdString());
        }
        ads.WriteSpiskiN(ssn);
+
+       vector<string> all_tasks = ads.ReadTask();
+
+       vector<string> ss;
+       ss.push_back("");
+       for(int i = 0; i < ui->tableWidget->rowCount(); i++){
+           ss.push_back(std::to_string(ui->listWidget->currentRow()) + ui->tableWidget->item(i,0)->text().toStdString());
+       }
+       for(size_t i = 0; i < all_tasks.size(); i++){
+           if(all_tasks[i].substr(0,1) != std::to_string(ui->listWidget->currentRow())){
+                ss.push_back(all_tasks[i]);
+           }
+       }
+       ads.WriteTask(ss);
        event->accept();
     }
      else

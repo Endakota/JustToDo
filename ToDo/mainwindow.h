@@ -18,15 +18,19 @@ public:
 protected slots:
     void on_pushButton_clicked();
 
-    void on_listWidget_clicked(const QModelIndex &index);
+    void on_listWidget_clicked();
 
 
     void on_addTask_clicked();
     virtual void closeEvent(QCloseEvent *event);
     void ShowContextMenu(const QPoint& pos);
     void on_action_1();
-    void on_action_2();
 
+    void ShowContextTask(const QPoint& pos);
+    void deleteTask();
+    void add2Fav();
+    void add2Day();
+    void doneTask();
 private:
     Ui::MainWindow *ui;
 };
