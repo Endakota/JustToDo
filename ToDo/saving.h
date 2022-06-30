@@ -4,8 +4,11 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
+#include <QDateTime>
+#include <QMessageBox>
 using namespace std;
+
+
 struct Spisok{
     string iconPath;
     string name;
@@ -13,6 +16,7 @@ struct Spisok{
 };
 class Saving
 {
+    string data = QDateTime::currentDateTime().toString("ddMMyyyy").toStdString();
     public:vector<string> Read()
     {
         ifstream inFile;
@@ -32,10 +36,30 @@ class Saving
          string line;
          vector<string> taskInFile;
          ifstream readTask;
+         taskInFile.push_back("");
          readTask.open("Tasks.csv");
          while (!readTask.eof()) {
              getline(readTask, line);
-             taskInFile.push_back(line);
+             if(line.size() != 0){
+                taskInFile.push_back(line);
+             }
+
+         }
+
+         readTask.close();
+         return taskInFile;
+    }
+    public:vector<string> ReadDoneTask(){
+         string line;
+         vector<string> taskInFile;
+         taskInFile.push_back("");
+         ifstream readTask;
+         readTask.open("doneTasks.csv");
+         while (!readTask.eof()) {
+             getline(readTask, line);
+             if(line.size() != 0){
+                taskInFile.push_back(line);
+             }
          }
 
          readTask.close();
@@ -59,31 +83,50 @@ class Saving
         return taskInFile;
 
     }
-//    public: vector<string> Addtasks_n(string path, vector<string> tasks){
-//        string line;
-//        vector<string> taskInFile;
-//        ifstream readTask;
-//        readTask.open("Tasks.csv");
-//        while (!readTask.eof()) {
-//            getline(readTask, line);
-//            if(path != line.substr(0,1)){
-//                taskInFile.push_back(line);
-//            }
-//        }
-//        readTask.close();
-//        for(auto i : tasks){
-//            taskInFile.push_back(i);
-//        }
-//        return taskInFile;
-//    }
-    public: void WriteTask(vector<string> task)
+    public: void WriteTask(vector<string> task, string path = "Tasks.csv")
     {
         ofstream writeTask;
-        writeTask.open("Tasks.csv");
+        writeTask.open(path);
         task.erase(task.begin());
         for (auto val: task)
         {
-            writeTask <<endl<< val;
+            if(val.size() != 0 && val.size() > 9){
+                if(val.substr(val.size()-8,val.size()) == data){
+                    QMessageBox msgBox;
+                    msgBox.setWindowTitle("Пример");
+                    msgBox.setText(QString::fromStdString(val.substr(val.size()-8,val.size())));
+                    msgBox.exec();
+                    writeTask <<endl<< val ;
+                }
+            }else if(val.size() != 0 && val.size() < 9){
+                writeTask <<endl<< val + data ;
+            }
+        }
+
+        writeTask.close();
+    }
+    public: void doneTask(vector<string> task, string path = "doneTasks.csv")
+    {
+        ofstream writeTask;
+        writeTask.open(path);
+        task.erase(task.begin());
+        for (auto val: task)
+        {
+            if(val.size() != 0 && val.size() > 9){
+                if(val.substr(val.size()-8,val.size()) == data){
+
+
+                    QMessageBox msgBox;
+                    msgBox.setWindowTitle("Пример");
+                    msgBox.setText(QString::fromStdString(val.substr(val.size()-8,val.size())));
+                    msgBox.exec();
+
+                    writeTask <<endl<< val ;
+                }
+            }else if(val.size() != 0 && val.size() < 9){
+                writeTask <<endl<< val + data;
+            }
+
         }
 
         writeTask.close();

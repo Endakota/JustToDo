@@ -354,7 +354,11 @@ debug/main.o: ../ToDo/main.cpp ../ToDo/mainwindow.h \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtCore/qeventloop.h \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtGui/qinputmethod.h
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtGui/qinputmethod.h \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/QMessageBox \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/qdialog.h \
+		../ToDo/saving.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\ToDo\main.cpp
 
 debug/mainwindow.o: ../ToDo/mainwindow.cpp ../ToDo/mainwindow.h \
@@ -534,7 +538,11 @@ debug/mainwindow.o: ../ToDo/mainwindow.cpp ../ToDo/mainwindow.h \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/qdialog.h \
 		../ToDo/saving.h \
-		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/QTableWidgetItem
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtWidgets/QTableWidgetItem \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtGui/QCloseEvent \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtCore/QDateTime \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtCore/qdatetime.h \
+		C:/Qt/Qt5.12.0/5.12.0/mingw73_64/include/QtCore/QTime
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\ToDo\mainwindow.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 

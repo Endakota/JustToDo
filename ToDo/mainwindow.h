@@ -30,7 +30,8 @@ protected slots:
     void deleteTask();
     void add2Fav();
     void add2Day();
-    void doneTask();
+
+//    void doneTask();
 private:
     Ui::MainWindow *ui;
 };
