@@ -161,13 +161,15 @@ public:
         scrollTasks->setWidgetResizable(true);
         layout = new QWidget();
         layout->setObjectName(QString::fromUtf8("layout"));
-        layout->setGeometry(QRect(0, 0, 554, 420));
+        layout->setGeometry(QRect(0, 0, 555, 420));
         verticalLayout_3 = new QVBoxLayout(layout);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         tableWidget = new QTableWidget(layout);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setStyleSheet(QString::fromUtf8("border-radius: 5px;\n"
+"background-color: white; "));
         tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         tableWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         tableWidget->setRowCount(0);
@@ -184,7 +186,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 869, 26));
+        menuBar->setGeometry(QRect(0, 0, 870, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -206,7 +208,7 @@ public:
         pushButton->setText(QApplication::translate("MainWindow", "+", nullptr));
         groupBox_2->setTitle(QString());
         groupBox_4->setTitle(QString());
-        task_line->setPlaceholderText(QApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\267\320\260\320\264\320\260\321\207\321\203 \320\265\320\277\321\202\320\260", nullptr));
+        task_line->setPlaceholderText(QApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\264\320\276\320\261\320\260\320\262\320\273\321\217\320\265\320\274\321\203\321\216 \320\267\320\260\320\264\320\260\321\207\321\203", nullptr));
         addTask->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\267\320\260\320\264\320\260\321\207\321\203", nullptr));
     } // retranslateUi
 

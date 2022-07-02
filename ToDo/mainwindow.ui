@@ -165,7 +165,7 @@ background-color: white;</string>
 background-color: white;</string>
             </property>
             <property name="placeholderText">
-             <string>Введите задачу епта</string>
+             <string>Введите добавляемую задачу</string>
             </property>
            </widget>
           </item>
@@ -217,13 +217,17 @@ border-radius: 5px;</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>554</width>
+            <width>555</width>
             <height>420</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="QTableWidget" name="tableWidget">
+             <property name="styleSheet">
+              <string notr="true">border-radius: 5px;
+background-color: white; </string>
+             </property>
              <property name="horizontalScrollBarPolicy">
               <enum>Qt::ScrollBarAlwaysOn</enum>
              </property>
@@ -249,7 +253,7 @@ border-radius: 5px;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>869</width>
+     <width>870</width>
      <height>26</height>
     </rect>
    </property>
