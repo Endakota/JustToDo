@@ -58,7 +58,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(869, 600);
+        MainWindow->resize(870, 600);
         MainWindow->setMinimumSize(QSize(800, 600));
         MainWindow->setStyleSheet(QString::fromUtf8("background-color: #80bfff"));
         centralWidget = new QWidget(MainWindow);
@@ -79,7 +79,7 @@ public:
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setMaximumSize(QSize(16777215, 16777215));
         listWidget->setAutoFillBackground(false);
-        listWidget->setStyleSheet(QString::fromUtf8(""));
+        listWidget->setStyleSheet(QString::fromUtf8("background-color: white;"));
         listWidget->setLineWidth(1);
         listWidget->setAutoScrollMargin(16);
         listWidget->setIconSize(QSize(20, 20));
@@ -102,7 +102,10 @@ public:
 
         pushButton = new QPushButton(groupBox);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setMinimumSize(QSize(50, 25));
         pushButton->setMaximumSize(QSize(50, 50));
+        pushButton->setStyleSheet(QString::fromUtf8("border-radius: 5px;\n"
+"background-color: white;"));
 
         verticalLayout->addWidget(pushButton);
 
@@ -132,12 +135,17 @@ public:
         task_line = new QLineEdit(groupBox_4);
         task_line->setObjectName(QString::fromUtf8("task_line"));
         task_line->setMinimumSize(QSize(0, 40));
+        task_line->setStyleSheet(QString::fromUtf8("border-radius: 5px;\n"
+"background-color: white;"));
 
         horizontalLayout_2->addWidget(task_line);
 
         addTask = new QPushButton(groupBox_4);
         addTask->setObjectName(QString::fromUtf8("addTask"));
-        addTask->setMinimumSize(QSize(0, 40));
+        addTask->setMinimumSize(QSize(120, 40));
+        addTask->setMaximumSize(QSize(120, 16777215));
+        addTask->setStyleSheet(QString::fromUtf8("background-color: white;\n"
+"border-radius: 5px;"));
 
         horizontalLayout_2->addWidget(addTask);
 
@@ -160,6 +168,8 @@ public:
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         tableWidget = new QTableWidget(layout);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        tableWidget->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         tableWidget->setRowCount(0);
 
         verticalLayout_3->addWidget(tableWidget);

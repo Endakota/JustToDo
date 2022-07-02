@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string>
 #include <QDateTime>
-
+#include <QDebug>
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -52,10 +52,33 @@ MainWindow::MainWindow(QWidget *parent) :
         QListWidgetItem *newItem = new QListWidgetItem(QIcon("img/point'.png"),QString::fromStdString(l));
         ui->listWidget->insertItem(ui->listWidget->count(), newItem);
     }
+
     std::vector<std::string> readTask = ads.ReadTask();
     readTask.erase(readTask.begin());
 
+    string new_date = QDateTime::currentDateTime().toString("yyyyMMdd").toStdString();
 
+    QMessageBox::warning(this, "", QString::fromStdString(new_date));
+    string before_date;
+    string j;
+    string res = "";
+    vector<string> sss;
+    sss.push_back("");
+    for(auto i : readTask){
+        if(i[0] == '0'){
+            before_date = i.substr(i.size()-8, 8);
+
+            if(stoi(before_date) < stoi(new_date)){
+                j = "2"+i.substr(1,i.size()-9)+new_date;
+                i = j;
+            }
+        }
+        sss.push_back(i);
+    }
+    ads.WriteTask(sss);
+
+
+    readTask = ads.ReadTask();
     ui->tableWidget->clearContents();
     ui->tableWidget->setHorizontalHeaderLabels({ui->listWidget->currentItem()->text()});
     for(QListWidgetItem *item: ui->listWidget->selectedItems()){
@@ -81,6 +104,7 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
 }
+
 void MainWindow::ShowContextMenu(const QPoint& pos)
 {
     QPoint globalPos = ui->listWidget->mapToGlobal(pos);
@@ -96,32 +120,37 @@ void MainWindow::ShowContextTask(const QPoint& pos)
 
     QMenu myMenu;
     myMenu.addAction("Удалить задачу", this, SLOT(deleteTask()));
-    if(ui->listWidget->currentItem()->text() == "Мой день" || ui->listWidget->currentItem()->text() == "Задачи"){
+    if(ui->listWidget->currentItem()->text() != "Избранное"){
         myMenu.addAction("Добавить задачу в 'Избранное'", this, SLOT(add2Fav()));
     }
-    if(ui->listWidget->currentItem()->text() == "Избранное" || ui->listWidget->currentItem()->text() == "Задачи"){
+    if(ui->listWidget->currentItem()->text() != "Мой день"){
         myMenu.addAction("Добавить задачу в 'Мой день'", this, SLOT(add2Day()));
     }
 
     myMenu.exec(globalPos);
 }
+
 void MainWindow::deleteTask()
 {
     ui->tableWidget->removeRow(ui->tableWidget->currentRow());
 }
+
 void MainWindow::add2Fav(){
+    string datee = QDateTime::currentDateTime().toString("yyyyMMdd").toStdString();
     Saving ads;
     vector<string> v = ads.ReadTask();
     string text = qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(ui->tableWidget->currentRow(),0))->text().toStdString();
-    v.push_back("1" + text);
+    v.push_back("1" + text+datee);
     ads.WriteTask(v);
     ui->tableWidget->removeRow(ui->tableWidget->currentRow());
 }
+
 void MainWindow::add2Day(){
+    string datee = QDateTime::currentDateTime().toString("yyyyMMdd").toStdString();
     Saving ads;
     vector<string> v = ads.ReadTask();
     string text = qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(ui->tableWidget->currentRow(),0))->text().toStdString();
-    v.push_back("0" + text);
+    v.push_back("0" + text + datee);
     ads.WriteTask(v);
     ui->tableWidget->removeRow(ui->tableWidget->currentRow());
 }
@@ -159,6 +188,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 void MainWindow::on_pushButton_clicked()
 {
     Saving ads;
@@ -190,23 +220,33 @@ void MainWindow::on_pushButton_clicked()
         count = 0;
     }
 }
+
 int step = 2;
 void MainWindow::on_listWidget_clicked()
 {
+    string datee = QDateTime::currentDateTime().toString("yyyyMMdd").toStdString();
+
     Saving ads;
+    /**/
+
+
+    /**/
+
     vector<string> all_tasks = ads.ReadTask();
     vector<string> all_done_tasks = ads.ReadDoneTask();
     vector<string> ss,dss;
+
     ss.push_back("");
     dss.push_back("");
+
     for(int i = 0; i < ui->tableWidget->rowCount(); i++){
         if(qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(i,0))->isChecked()){
             string text = qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(i,0))->text().toStdString();
-            dss.push_back(std::to_string(step) + text);
+            dss.push_back(std::to_string(step) + text + datee);
 
         }else{
             string text = qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(i,0))->text().toStdString();
-            ss.push_back(std::to_string(step) + text);
+            ss.push_back(std::to_string(step) + text + datee);
         }
     }
 
@@ -220,17 +260,44 @@ void MainWindow::on_listWidget_clicked()
              dss.push_back(all_done_tasks[i]);
         }
     }
+
     ads.WriteTask(ss);
     ads.doneTask(dss);
-    std::vector<std::string> readTask = ads.ReadTask();
-    readTask.erase(readTask.begin());
+
+    vector<string> readTask = ads.ReadTask();
+    string new_date = QDateTime::currentDateTime().toString("yyyyMMdd").toStdString();
+    string before_date;
+    string j;
+    string res = "";
+    vector<string> sss;
+    sss.push_back("");
+    for(auto i : readTask){
+        if(i[0] == '0'){
+            before_date = i.substr(i.size()-8, 8);
+
+            if(stoi(before_date) < stoi(new_date)){
+                j = "2"+i.substr(1,i.size()-9)+new_date;
+                i = j;
+            }
+        }
+
+        sss.push_back(i);
+    }
+
+    ads.WriteTask(sss);
+
     QFont newFont("MS Shell Dlg 2", 8);
     ui->task_line->setFont(newFont);
     ui->listWidget->currentItem()->setFlags (ui->listWidget->currentItem()->flags () | Qt::ItemIsEditable);
 
 
-    ui->tableWidget->clearContents();
+    readTask = ads.ReadTask();
+    readTask.erase(readTask.begin());
 
+    dss = ads.ReadDoneTask();
+    dss.erase(dss.begin());
+
+    ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(0);
 
     for(QListWidgetItem *item: ui->listWidget->selectedItems()){
@@ -245,8 +312,8 @@ void MainWindow::on_listWidget_clicked()
                 ui->tableWidget->setCellWidget(ui->tableWidget->rowCount()-1,0,checkBox);
             }
         }
-        Saving ads;
-        vector <string> dss = ads.ReadDoneTask();
+
+
         for(string l : dss){
             if(!std::to_string(row).compare(l.substr(0,1))){
                 ui->tableWidget->insertRow(ui->tableWidget->rowCount());
@@ -266,6 +333,8 @@ void MainWindow::on_listWidget_clicked()
 
 void MainWindow::on_addTask_clicked()
 {
+    string data = QDateTime::currentDateTime().toString("yyyyMMdd").toStdString();
+
     if(ui->task_line->text().length() >= 3){
         ui->tableWidget->insertRow( ui->tableWidget->rowCount() );
         QCheckBox *checkBox = new QCheckBox;
@@ -274,10 +343,12 @@ void MainWindow::on_addTask_clicked()
 
         //ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 0, new QTableWidgetItem(ui->task_line->text() + "0"));
         Saving ads;
+        vector<string> addedTask;
 
         for(QListWidgetItem *item: ui->listWidget->selectedItems()){
             int row = ui->listWidget->row(item);
-            vector<string> addedTask = ads.AddTask(std::to_string(row), ui->task_line->text().toStdString());
+            string path = std::to_string(row);
+            addedTask = ads.AddTask(std::to_string(row), ui->task_line->text().toStdString() + data);
             ads.WriteTask(addedTask);
         }
         ui->task_line->clear();
@@ -286,8 +357,15 @@ void MainWindow::on_addTask_clicked()
     }
 
 }
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+//    QMessageBox msgBox;
+//    msgBox.setWindowTitle("Пример");
+//    msgBox.setText("Тестовое сообщение");
+//    msgBox.exec();
+    string data = QDateTime::currentDateTime().toString("yyyyMMdd").toStdString();
+
     if (QMessageBox::question(this,tr("Confirmation"),tr("Exit program?"),QMessageBox::Yes | QMessageBox::No)==QMessageBox::Yes){
        Saving ads;
        vector<string> ssn;
@@ -297,24 +375,32 @@ void MainWindow::closeEvent(QCloseEvent *event)
        ads.WriteSpiskiN(ssn);
 
        vector<string> all_tasks = ads.ReadTask();
+       vector<string> all_done_tasks = ads.ReadDoneTask();
 
        vector<string> ss,dss;
        ss.push_back("");
        dss.push_back("");
+       string res = "";
        for(int i = 0; i < ui->tableWidget->rowCount(); i++){
            if(qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(i,0))->isChecked()){
                QString text = qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(i,0))->text();
-               dss.push_back(std::to_string(ui->listWidget->currentRow()) + text.toStdString());
-
+               dss.push_back(std::to_string(ui->listWidget->currentRow()) + text.toStdString() + data);
+//               res += text.toStdString() + "|"; // для MessageBox
            }else{
                QString text = qobject_cast<QCheckBox*>(ui->tableWidget->cellWidget(i,0))->text();
-               ss.push_back(std::to_string(ui->listWidget->currentRow()) + text.toStdString());
+               ss.push_back(std::to_string(ui->listWidget->currentRow()) + text.toStdString() + data);
            }
 
        }
+//       QMessageBox::warning(this,"",QString::fromStdString(res));
        for(size_t i = 0; i < all_tasks.size(); i++){
            if(all_tasks[i].substr(0,1) != std::to_string(ui->listWidget->currentRow())){
                 ss.push_back(all_tasks[i]);
+           }
+       }
+       for(size_t i = 0; i < all_done_tasks.size(); i++){
+           if(all_done_tasks[i].substr(0,1) != std::to_string(ui->listWidget->currentRow())){
+                dss.push_back(all_done_tasks[i]);
            }
        }
        ads.doneTask(dss);

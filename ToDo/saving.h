@@ -8,15 +8,8 @@
 #include <QMessageBox>
 using namespace std;
 
-
-struct Spisok{
-    string iconPath;
-    string name;
-    vector <string> tasks;
-};
 class Saving
 {
-    string data = QDateTime::currentDateTime().toString("ddMMyyyy").toStdString();
     public:vector<string> Read()
     {
         ifstream inFile;
@@ -83,6 +76,7 @@ class Saving
         return taskInFile;
 
     }
+
     public: void WriteTask(vector<string> task, string path = "Tasks.csv")
     {
         ofstream writeTask;
@@ -90,17 +84,8 @@ class Saving
         task.erase(task.begin());
         for (auto val: task)
         {
-            if(val.size() != 0 && val.size() > 9){
-                if(val.substr(val.size()-8,val.size()) == data){
-                    QMessageBox msgBox;
-                    msgBox.setWindowTitle("Пример");
-                    msgBox.setText(QString::fromStdString(val.substr(val.size()-8,val.size())));
-                    msgBox.exec();
-                    writeTask <<endl<< val ;
-                }
-            }else if(val.size() != 0 && val.size() < 9){
-                writeTask <<endl<< val + data ;
-            }
+//
+            writeTask <<endl<< val;
         }
 
         writeTask.close();
@@ -112,21 +97,8 @@ class Saving
         task.erase(task.begin());
         for (auto val: task)
         {
-            if(val.size() != 0 && val.size() > 9){
-                if(val.substr(val.size()-8,val.size()) == data){
 
-
-                    QMessageBox msgBox;
-                    msgBox.setWindowTitle("Пример");
-                    msgBox.setText(QString::fromStdString(val.substr(val.size()-8,val.size())));
-                    msgBox.exec();
-
-                    writeTask <<endl<< val ;
-                }
-            }else if(val.size() != 0 && val.size() < 9){
-                writeTask <<endl<< val + data;
-            }
-
+            writeTask <<endl<< val;
         }
 
         writeTask.close();

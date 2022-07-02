@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>869</width>
+    <width>870</width>
     <height>600</height>
    </rect>
   </property>
@@ -54,7 +54,7 @@
           <bool>false</bool>
          </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">background-color: white;</string>
          </property>
          <property name="lineWidth">
           <number>1</number>
@@ -103,11 +103,21 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>25</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>50</width>
            <height>50</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius: 5px;
+background-color: white;</string>
          </property>
          <property name="text">
           <string>+</string>
@@ -150,8 +160,12 @@
               <height>40</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">border-radius: 5px;
+background-color: white;</string>
+            </property>
             <property name="placeholderText">
-             <string>Введите добавляемую задачу</string>
+             <string>Введите задачу епта</string>
             </property>
            </widget>
           </item>
@@ -159,9 +173,19 @@
            <widget class="QPushButton" name="addTask">
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>120</width>
               <height>40</height>
              </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>120</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: white;
+border-radius: 5px;</string>
             </property>
             <property name="text">
              <string>Добавить задачу</string>
@@ -200,6 +224,12 @@
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="QTableWidget" name="tableWidget">
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOn</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContents</enum>
+             </property>
              <property name="rowCount">
               <number>0</number>
              </property>
